@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: business-event-manager-backend-dev
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app/backend
+      - /app/backend/node_modules
+      - ./uploads:/app/uploads
+      - ./backend/database:/app/backend/database
+    environment:
+      - PORT=5000
+      - DB_PATH=./database/business_events.db
+      - UPLOAD_PATH=../uploads
+      - NODE_ENV=development
+    command: npm run dev
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: business-event-manager-frontend-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app/frontend
+      - /app/frontend/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://localhost:5000
+    command: npm run dev
+    depends_on:
+      - backend
+    restart: unless-stopped

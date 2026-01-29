@@ -1,12 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
 const path = require('path');
 
-dotenv.config();
-
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
@@ -15,13 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Import routes
-const eventsRouter = require('./routes/events');
-const contactsRouter = require('./routes/contacts');
-const categoriesRouter = require('./routes/categories');
-const searchRouter = require('./routes/search');
-const reportsRouter = require('./routes/reports');
+const eventsRouter = require('../routes/events');
+const contactsRouter = require('../routes/contacts');
+const categoriesRouter = require('../routes/categories');
+const searchRouter = require('../routes/search');
+const reportsRouter = require('../routes/reports');
 
-// API Routes
+// Routes
 app.use('/api/events', eventsRouter);
 app.use('/api/contacts', contactsRouter);
 app.use('/api/categories', categoriesRouter);
@@ -33,23 +29,10 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Business Event Manager API is running' });
 });
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, '../frontend/dist');
-  app.use(express.static(frontendPath));
-  
-  // Handle client-side routing - send all non-API requests to index.html
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(frontendPath, 'index.html'));
-  });
-}
-
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Something went wrong!', message: err.message });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+module.exports = app;

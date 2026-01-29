@@ -8,19 +8,26 @@
     "dev": "nodemon server.js",
     "init-db": "node scripts/initDatabase.js"
   },
-  "keywords": ["event-manager", "business", "contacts"],
+  "keywords": [
+    "event-manager",
+    "business",
+    "contacts"
+  ],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "sqlite3": "^5.1.6",
-    "multer": "^1.4.5-lts.1",
     "date-fns": "^2.30.0",
-    "express-validator": "^7.0.1"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "@types/jest": "^30.0.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.0.1",
+    "supertest": "^7.2.2"
   }
 }

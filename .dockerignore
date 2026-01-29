@@ -1,0 +1,53 @@
+# Node modules
+**/node_modules
+**/npm-debug.log
+
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Environment files
+**/.env
+**/.env.local
+**/.env.production
+
+# Database files
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Uploads (will be mounted as volume)
+uploads/*
+!uploads/.gitkeep
+
+# Frontend build artifacts (will be built in container)
+frontend/dist
+frontend/build
+
+# IDE
+.vscode
+.idea
+**/*.swp
+**/*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+**/*.log
+
+# Test files
+**/tests
+**/*.test.js
+**/test_*.db
+
+# Temporary files
+**/*.tmp
+**/*.temp
+.cache
